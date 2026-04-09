@@ -1,12 +1,27 @@
 package NoMuscle;
 
 public class Event {
-    Event thisEvent;
+    private int probCoefficient;
+    public Entity containedFight;
+    public Occurence containedOccurrence;
 
-    public void applyEvent(){
-        thisEvent.doThing();
+    /**
+     * Event class with no parameters - throws illegal argument exception
+     * because event MUST have parameters
+     */
+    public Event() throws IllegalArgumentException {
+
     }
 
-    public void doThing() {
+    /**
+     * getProbCoefficient
+     *
+     * gets the probability coefficient for the event
+     *
+     * @return probability coefficient
+     */
+    public int getProbCoefficient() {
+        return probCoefficient;
     }
+
 }
