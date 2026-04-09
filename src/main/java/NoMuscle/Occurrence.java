@@ -10,7 +10,7 @@ public class Occurrence extends Event {
     }
 
     public boolean canGive(Player player) {
-        return true
+        return true;
     }
 
 
