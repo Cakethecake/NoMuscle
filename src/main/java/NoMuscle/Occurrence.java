@@ -1,10 +1,10 @@
 package NoMuscle;
 
-public class Occurence extends Event {
+public class Occurrence extends Event {
 
     protected String name;
 
-    public Occurence(String name) {
+    public Occurrence(String name) {
 
         this.name =name;
     }
@@ -23,6 +23,7 @@ public class Occurence extends Event {
     }
 
     public void doThing(Player player) {
+
         System.out.println("Encounter:" + name);
 
         if (canGive(player)) {
