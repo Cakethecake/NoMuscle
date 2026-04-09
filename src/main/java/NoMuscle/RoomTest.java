@@ -1,25 +1,45 @@
 package NoMuscle;
+/*
+Name: Jamieson Moore
+Room Test Class
+ */
 
 public class RoomTest {
+
     public static void main(String[] args) {
-        Event e1  = new Event("Combat");
-        Event e2  = new Event("Encounter");
-        Event e3  = new Event("Item");
 
-        Event[] events = {e1,e2,e3};
+        try {
+            // Create room using default constructor
+            Room room = new Room();
 
-        Room room = new Room("test room", events);
+            // Test name
+            System.out.println("Room Name: " + room.getName());
 
-        //Test Values
-        System.out.println("room Name: " + room.getName());
+            // Test events array
+            System.out.println("Number of events: " + room.getEventsInside().length);
 
-        System.out.println("Events inside room:");
-        for (Event e : room.getEventsInside()) {
-            System.out.println(e.getName());
+            // Test probabilities
+            System.out.println("Event probabilities:");
+            for (double p : room.getEventProbs()) {
+                System.out.println(p);
+            }
+
+            // Test enterRoom()
+            Event triggered = room.enterRoom();
+
+            System.out.println("Event triggered successfully.");
+
+            // Optional: check type of event
+            if (triggered.containedFight != null) {
+                System.out.println("Combat event.");
+            } else if (triggered.containedOccurrence != null) {
+                System.out.println("Encounter event.");
+            } else {
+                System.out.println("Other event.");
+            }
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error creating room: " + e.getMessage());
         }
-        //Test method
-        Event triggered = room.enterRoom();
-
-        System.out.println("triggered Event: " + triggered.getName());
     }
 }
