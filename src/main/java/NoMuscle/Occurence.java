@@ -1,8 +1,14 @@
 package NoMuscle;
 
 public class Occurence extends Event {
-    @Override
-    public void doThing() {
+    protected String name;
+
+    public Occurence(String name) {
+        this.name =name;
+    }
+
+
+    public void doThing(Player player) {
         super.doThing();
     }
 }
