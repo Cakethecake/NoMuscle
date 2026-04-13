@@ -3,7 +3,7 @@ package NoMuscle;
 public class Event {
     private int probCoefficient;
     public Entity containedFight;
-    public Occurence containedOccurrence;
+    public Occurrence containedOccurrence;
 
     /**
      * Event class with no parameters - throws illegal argument exception
