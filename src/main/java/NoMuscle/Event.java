@@ -10,7 +10,17 @@ public class Event {
      * because event MUST have parameters
      */
     public Event() throws IllegalArgumentException {
+        throw new IllegalArgumentException("Event must have parameter >:(");
+    }
 
+    /**
+     *
+     * just stores and returns the coefficient
+     *
+     * @param probCoefficient
+     */
+    public Event(int probCoefficient) {
+        this.probCoefficient = probCoefficient;
     }
 
     /**
