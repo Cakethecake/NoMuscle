@@ -6,13 +6,13 @@ public class Entity extends Event{
     private int baseDmg;
 
     public int attackPlayer() {
-        return 0;
+        return
     }
 
     public void getAttacked(int dmg) {
-
+        
     }
-    public Entity(String name, int HP, int baseDmg){
 
+    public Entity(String name, int HP, int baseDmg){
     }
 }
