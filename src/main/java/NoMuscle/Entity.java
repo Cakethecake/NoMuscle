@@ -5,7 +5,7 @@ public class Entity extends Event{
     public int HP;
     private int baseDmg;
 
-    public int attackPlayer() {
+    public String attackPlayer() {
         return "You took " + baseDmg + " damage";
     }
 
