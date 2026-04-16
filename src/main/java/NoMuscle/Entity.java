@@ -6,11 +6,11 @@ public class Entity extends Event{
     private int baseDmg;
 
     public String attackPlayer() {
-        return "You took " + baseDmg + " damage";
+        return toString("You took " + baseDmg + " damage." );
     }
 
     public void getAttacked(int dmg) {
-        
+        return "You took " + baseDmg + " from "
     }
 
     public Entity(String name, int HP, int baseDmg){
