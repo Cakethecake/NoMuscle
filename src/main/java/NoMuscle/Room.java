@@ -6,13 +6,14 @@ import java.util.Random;
 
 public class Room {
 
-    private String name;
+    private Random RNG = new Random();
+    private RoomNames name;
     private Event[] eventsInside;
     private double[] eventProbs;
 
     //  Default constructor (for driver obv)
     public Room() throws IllegalArgumentException {
-        this.name = "Default Room";
+        this.name = null;
 
         Event e1 = new Event();
         Event e2 = new Event();
@@ -23,13 +24,13 @@ public class Room {
     }
 
     // Main constructor
-    public Room(String name, Event[] eventsInside, double[] eventProbs) {
-        this.name = name;
+    public Room(Event[] eventsInside, double[] eventProbs) {
+        this.name = RoomNames.values()[RNG.nextInt(RoomNames.values().length - 1)];
         this.eventsInside = eventsInside;
         this.eventProbs = eventProbs;
     }
 
-    public String getName() {
+    public RoomNames getName() {
         return name;
     }
 

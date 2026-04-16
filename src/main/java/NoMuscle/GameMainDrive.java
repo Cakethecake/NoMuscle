@@ -5,8 +5,9 @@ public class GameMainDrive {
 
     public static void main(String[] args) {
         Scanner userIn = new Scanner(System.in);
+        boolean keepPlaying = true;
 
-        while (true) {
+        while (keepPlaying) {
 
             Player you = GameMainDrive.gameIntro();
 
@@ -18,6 +19,8 @@ public class GameMainDrive {
 
                 System.out.println("Three rooms are before you, where do you go? (Enter the room number)");
                 System.out.println();
+
+
             }
 
             System.out.println("This is the end of everything... But not you.");
