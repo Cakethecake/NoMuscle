@@ -10,7 +10,7 @@ public class Entity extends Event{
     }
 
     public void getAttacked(int dmg) {
-        return "You took " + baseDmg + " from "
+        return toString("You took " + baseDmg + " from ");
     }
 
     public Entity(String name, int HP, int baseDmg){
