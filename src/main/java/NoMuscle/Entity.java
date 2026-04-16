@@ -12,4 +12,7 @@ public class Entity extends Event{
     public void getAttacked(int dmg) {
 
     }
+    public Entity(String name, int HP, int baseDmg){
+
+    }
 }
