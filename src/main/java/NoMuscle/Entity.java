@@ -6,7 +6,7 @@ public class Entity extends Event{
     private int baseDmg;
 
     public int attackPlayer() {
-
+        return 0;
     }
 
     public void getAttacked(int dmg) {
