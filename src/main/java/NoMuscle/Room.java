@@ -12,12 +12,12 @@ public class Room {
     private double[] eventProbs;
 
     //  Default constructor (for driver obv)
-    public Room() throws IllegalArgumentException {
-        this.name = null;
+    public Room() {
+        this.name = RoomNames.values()[RNG.nextInt(RoomNames.values().length - 1)];
 
-        Event e1 = new Event();
-        Event e2 = new Event();
-        Event e3 = new Event();
+        Event e1 = new Event(RNG.nextInt(4));
+        Event e2 = new Event(RNG.nextInt(4));
+        Event e3 = new Event(RNG.nextInt(4));
 
         this.eventsInside = new Event[]{e1, e2, e3};
         this.eventProbs = new double[]{0.33, 0.33, 0.34};

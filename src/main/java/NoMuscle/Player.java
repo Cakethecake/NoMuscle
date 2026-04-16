@@ -30,6 +30,10 @@ public class Player {
         return health;
     }
 
+    public void changeHealth(int diff) {
+        health += diff;
+    }
+
     public int getBaseDmg() {
         return baseDmg;
     }
