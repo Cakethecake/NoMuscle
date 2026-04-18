@@ -1,11 +1,13 @@
 package NoMuscle;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Player {
     public String name;
     public int health;
     public int baseDmg;
     public double baseAcc;
+    private Random RNG;
 
     public Player() {
         System.out.println("please do not use a blank player!!!");
@@ -31,7 +33,7 @@ public class Player {
     }
 
     public void changeHealth(int diff) {
-        health += diff;
+        this.health += diff;
     }
 
     public int getBaseDmg() {
@@ -40,6 +42,15 @@ public class Player {
 
     public double getBaseAcc() {
         return baseAcc;
+    }
+
+    public int attack(Entity opp) {
+        if (RNG.nextDouble() < this.getBaseAcc()) {
+            System.out.printf("Dealt %d", baseDmg);
+            return this.baseDmg;
+        }
+        System.out.println("Missed!");
+        return 0;
     }
 
 

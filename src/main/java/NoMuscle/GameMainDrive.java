@@ -4,8 +4,8 @@ import java.util.Scanner;
 public class GameMainDrive {
 
     public static void main(String[] args) {
-        Scanner userIn = new Scanner(System.in);
         boolean keepPlaying = true;
+        int roomChoice = 0;
 
         while (keepPlaying) {
 
@@ -17,11 +17,12 @@ public class GameMainDrive {
                 Room room2 = new Room();
                 Room room3 = new Room();
 
-                System.out.println("Three rooms are before you, where do you go? (Enter the room number)");
+                System.out.println("Three rooms are before you.");
                 System.out.println();
 
-                System.out.printf("1. %s\n2. %s\n 3. %s\n", room1.getName(), room2.getName(), room3.getName());
+                System.out.printf("1. %s\n2. %s\n 3. %s\n Where are you pulled to? (Enter the room number)", room1.getName(), room2.getName(), room3.getName());
 
+                roomChoice = intChoice(3);
 
 
             }
@@ -29,7 +30,7 @@ public class GameMainDrive {
             System.out.println("This is the end of everything... But not you.");
             System.out.println("Would you like to play again? (yes / no");
 
-            if (userIn.nextLine().equals("no")) {
+            if (strChoice().equals("no")) {
                 keepPlaying = false;
             }
 
@@ -43,7 +44,6 @@ public class GameMainDrive {
     the player dies.
      */
     public static Player gameIntro() {
-        Scanner userIn = new Scanner(System.in);
 
         System.out.println("---------NO-MUSCLE---------");
         System.out.println("A CLI game inspired by NO-SKIN by NOEYE SOFT");
@@ -51,8 +51,43 @@ public class GameMainDrive {
         System.out.println("");
         System.out.print("Enter a player name to start: ");
 
-        Player you = new Player(userIn.nextLine());
+        Player you = new Player(strChoice());
 
         return you;
+    }
+
+    public static int intChoice(int numCanMake) {
+
+        Scanner userIn = new Scanner(System.in);
+        int choice;
+
+        do {
+            choice = userIn.nextInt();
+        } while (choice < 1 || choice > numCanMake);
+
+        return choice;
+    }
+
+    public static String strChoice() {
+        Scanner userIn = new Scanner(System.in);
+        userIn.nextLine();
+        return userIn.nextLine();
+    }
+
+    public void fight(Entity yourOpp) {
+
+        boolean inFight = true;
+        int turnAction = 0;
+
+        while (inFight) {
+            System.out.printf("%s Stands before you.\nWhat do you do\n", yourOpp.name);
+            System.out.println("1. Use Knife\n2. Use Gun\n  3. Defend\n 4. Run");
+
+
+        }
+    }
+
+    public void enterRoom(Room entered) {
+
     }
 }
