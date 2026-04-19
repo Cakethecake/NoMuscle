@@ -13,16 +13,16 @@ public class GameMainDrive {
 
             while (you.health > 0) {
 
-                Room room1 = new Room();
-                Room room2 = new Room();
-                Room room3 = new Room();
+                Room[] roomList = new Room[] {new Room(), new Room(), new Room()};
 
                 System.out.println("Three rooms are before you.");
                 System.out.println();
 
-                System.out.printf("1. %s\n2. %s\n 3. %s\n Where are you pulled to? (Enter the room number)", room1.getName(), room2.getName(), room3.getName());
+                System.out.printf("1. %s\t2. %s\t 3. %s\n Where are you pulled to? (Enter the room number): ", roomList[0].getName(), roomList[1].getName(), roomList[2].getName());
 
                 roomChoice = intChoice(3);
+
+                System.out.printf("You go to the %s...\n", roomList[roomChoice - 1].getName());
 
 
             }
@@ -70,7 +70,6 @@ public class GameMainDrive {
 
     public static String strChoice() {
         Scanner userIn = new Scanner(System.in);
-        userIn.nextLine();
         return userIn.nextLine();
     }
 
@@ -90,4 +89,6 @@ public class GameMainDrive {
     public void enterRoom(Room entered) {
 
     }
+
+
 }

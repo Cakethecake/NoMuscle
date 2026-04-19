@@ -1,6 +1,6 @@
 package NoMuscle;
 
-public class Occurrence extends Event {
+public class Occurrence {
 
     protected String name;
 

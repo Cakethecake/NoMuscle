@@ -13,8 +13,8 @@ public class Event {
      * Event class with no parameters - throws illegal argument exception
      * because event MUST have parameters
      */
-    public Event() throws IllegalArgumentException {
-        throw new IllegalArgumentException("Event must have parameter >:(");
+    public Event() {
+        System.out.println("Event must have parameter >:(");
     }
 
     /**
@@ -32,10 +32,10 @@ public class Event {
 
         this.fightOrOccurrence = RNG.nextInt(2);
         if (fightOrOccurrence == 0) {
-            containedFight = new Entity();
+            containedFight = new Entity(1,false);
             containedOccurrence = null;
         } else {
-            containedOccurrence = new Occurrence();
+            containedOccurrence = new Occurrence("Placeholder");
             containedFight = null;
         }
     }

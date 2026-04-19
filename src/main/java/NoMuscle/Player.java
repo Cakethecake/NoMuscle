@@ -7,6 +7,7 @@ public class Player {
     public int health;
     public int baseDmg;
     public double baseAcc;
+    public int difficulty;
     private Random RNG;
 
     public Player() {
@@ -22,6 +23,7 @@ public class Player {
         health = 5;
         baseDmg = 1;
         baseAcc = .9;
+        difficulty = 1;
     }
 
     public String getName() {
@@ -43,6 +45,8 @@ public class Player {
     public double getBaseAcc() {
         return baseAcc;
     }
+
+    public int getDifficulty() { return  difficulty;}
 
     public int attack(Entity opp) {
         if (RNG.nextDouble() < this.getBaseAcc()) {
