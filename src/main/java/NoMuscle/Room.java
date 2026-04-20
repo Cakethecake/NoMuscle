@@ -43,8 +43,7 @@ public class Room {
     }
 
     public Event enterRoom() {
-        Random rand = new Random();
-        double randomValue = rand.nextDouble();
+        double randomValue = RNG.nextDouble();
 
         double cumulative = 0;
 

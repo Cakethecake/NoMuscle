@@ -3,13 +3,13 @@ import java.util.Scanner;
 
 public class GameMainDrive {
 
+    static Player you = GameMainDrive.gameIntro();
+
     public static void main(String[] args) {
         boolean keepPlaying = true;
         int roomChoice = 0;
 
         while (keepPlaying) {
-
-            Player you = GameMainDrive.gameIntro();
 
             while (you.health > 0) {
 
@@ -24,6 +24,10 @@ public class GameMainDrive {
 
                 System.out.printf("You go to the %s...\n", roomList[roomChoice - 1].getName());
 
+                Event thisEvent = roomList[roomChoice].enterRoom();
+                if (thisEvent.fightOrOccurrence == 0) {
+                    fight(thisEvent.containedFight);
+                }
 
             }
 
@@ -73,14 +77,14 @@ public class GameMainDrive {
         return userIn.nextLine();
     }
 
-    public void fight(Entity yourOpp) {
+    public static void fight(Entity yourOpp) {
 
         boolean inFight = true;
         int turnAction = 0;
 
         while (inFight) {
-            System.out.printf("%s Stands before you.\nWhat do you do\n", yourOpp.name);
-            System.out.println("1. Use Knife\n2. Use Gun\n  3. Defend\n 4. Run");
+            System.out.printf("%s stands before you.\nWhat do you do\n", yourOpp.name);
+            System.out.println("1. Use Knife\n2. Use Gun\n 3. Reload Gun\n  3. Defend\n 4. Run");
 
 
         }

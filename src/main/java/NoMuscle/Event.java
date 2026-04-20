@@ -32,7 +32,7 @@ public class Event {
 
         this.fightOrOccurrence = RNG.nextInt(2);
         if (fightOrOccurrence == 0) {
-            containedFight = new Entity(1,false);
+            containedFight = new Entity(GameMainDrive.you.difficulty, false);
             containedOccurrence = null;
         } else {
             containedOccurrence = new Occurrence("Placeholder");
