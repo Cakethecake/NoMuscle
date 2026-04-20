@@ -72,6 +72,22 @@ public class Player {
         return baseAcc;
     }
 
+    public void printHP() {
+
+        System.out.print("[");
+
+        if (health < 20) {
+            for (int HP = 0; HP < health; HP++) {
+                System.out.print("♥");
+            }
+        } else {
+            System.out.print("♥ x " + health);
+        }
+
+        System.out.println("]");
+
+    }
+
     public int getDifficulty() { return  difficulty;}
 
     public int attackKnife(Entity opp) {

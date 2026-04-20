@@ -83,8 +83,18 @@ public class GameMainDrive {
         int turnAction = 0;
 
         while (inFight) {
-            System.out.printf("%s stands before you.\nWhat do you do\n", yourOpp.name);
-            System.out.println("1. Use Knife\n2. Use Gun\n 3. Reload Gun\n  3. Defend\n 4. Run");
+
+            System.out.println("===========================================================");
+            System.out.printf("\n%s stands before you. ", yourOpp.name);
+            yourOpp.printHP();
+
+            System.out.print("\nWhat do you do? ");
+            you.printHP();
+
+            System.out.printf("1. Use Knife (%d Damage, %f Accuracy)\n2. Use Gun (%d Damage, %f Accuracy)\n3. Reload Gun (%d/%d Ammo)\n4. Defend (Reduce damage taken to 1 this turn)\n5. Run\n",
+                    you.getBaseDmg(), you.getBaseAcc(), (int)Math.ceil(you.getBaseDmg() * 1.8), you.getBaseAcc() - .1, you.getAmmo(), you.maxAmmo);
+
+            turnAction = intChoice(5);
 
 
         }
