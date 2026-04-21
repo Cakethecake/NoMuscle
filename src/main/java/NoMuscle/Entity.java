@@ -16,3 +16,8 @@ public class Entity extends Event{
     public Entity(String name, int HP, int baseDmg){
     }
 }
+
+/**
+ * entity will have random stats but difficulty will be ranked by a multiplier
+ * main method will drive the attack
+ */
