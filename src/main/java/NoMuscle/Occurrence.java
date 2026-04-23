@@ -117,7 +117,7 @@ public class Occurrence {
         int lostHp;
 
         System.out.println("A stray cat wanders toward you with an empty bowl, you hear its stomach growl.");
-        System.out.println("1. Feed the cat (Lose 10% of your HP, reduce difficulty by 1).\n2. Don't feed the cat. (Nothing happens(?))");
+        System.out.println("1. Feed the cat (Lose 10% of your HP, reduce difficulty by 1).\n2. Don't feed the cat. (Nothing happens)");
 
         playerChoice = GameMainDrive.intChoice(2);
 
@@ -138,7 +138,7 @@ public class Occurrence {
             }
 
         } else {
-            System.out.println("The cat faints and you move on (how could you).");
+            System.out.println("The cat faints from hunger and you move on... (how could you).");
         }
 
     }
