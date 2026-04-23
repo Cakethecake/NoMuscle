@@ -32,7 +32,7 @@ public class Event {
             containedFight = new Entity(GameMainDrive.you.difficulty, false);
             containedOccurrence = null;
         } else {
-            containedOccurrence = new Occurrence("Placeholder");
+            containedOccurrence = new Occurrence();
             containedFight = null;
         }
     }

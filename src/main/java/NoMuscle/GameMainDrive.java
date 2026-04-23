@@ -151,9 +151,27 @@ public class GameMainDrive {
         }
     }
 
-    public void occur(Occurrence gambleRoom) {
+    public static void occur(Occurrence gambleRoom) {
 
-        gambleRoom.
+        eepy(500);
+
+        switch (gambleRoom.ID) {
+            case 1:
+                gambleRoom.Jax(you);
+                break;
+
+            case 2:
+                gambleRoom.Chess(you);
+                break;
+
+            case 3:
+                gambleRoom.Gojo(you);
+                break;
+
+            case 4:
+                
+        }
+
 
     }
 

@@ -12,7 +12,7 @@ public class Occurrence {
      * Hungry Car: Give HP to feed the cat, difficulty gets reduced by 1
      */
     private String[] posNames = new String[]{"Jax", "Incomplete Chess Set", "Gojo Satoru", "Final Exam", "The Alchemist", "A Hungry Cat"};
-    private int ID;
+    public int ID;
     protected String name;
     private static Random RNG = new Random();
 
@@ -59,6 +59,7 @@ public class Occurrence {
 
         System.out.println("1. Eat the chocolate (lose or gain random HP)\n2. Pocket the chocolate (Lose 1 HP)");
 
+        // Asks the player for their choice
         playerChoice = GameMainDrive.intChoice(2);
 
         if (playerChoice == 1) {
@@ -81,6 +82,25 @@ public class Occurrence {
             System.out.println("Jax glares at you, your heart is broken");
             you.changeHealth(-1);
 
+        }
+    }
+
+    public void Chess(Player you) {
+
+        int playerChoice;
+
+        System.out.println("In the room, you see a sad looking chess set with missing pieces.");
+        System.out.println("You look in your bag, the closes thing to a chess piece is your ammo.");
+        System.out.println("Your current max ammo is " + you.maxAmmo + " and your current accuracy is " + (int)(you.baseAcc * 100));
+        System.out.println("1. Fill in the missing pieces with bullets (Lose 1 max ammo, gain 10 accuracy)\n2. Leave");
+
+        playerChoice = GameMainDrive.intChoice(2);
+        if (you.maxAmmo > 0 && playerChoice == 1) {
+            System.out.println("It matches well enough.");
+            you.maxAmmo -= 1;
+            you.baseAcc += .1;
+        } else {
+            System.out.println("You walk away");
         }
     }
 
