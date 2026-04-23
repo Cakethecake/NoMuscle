@@ -104,7 +104,7 @@ public class Occurrence {
         }
     }
 
-    public void Gojo() {
+    public void Gojo(Player you) {
 
         System.out.println("Gojo stands before you, his really awesome aura is quite overwhelming.");
         System.out.println("You stand there in awe and waste your time glazing him. (Nothing happens)");
