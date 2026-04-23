@@ -3,14 +3,14 @@ package NoMuscle;
 import java.util.Random;
 
 public class Occurrence {
-    /** Occurance happenings:
+    /** Occurrence happenings:
      * Jax: Gives a chocolate that damages or heals the player for a random amt
      * Chess set: Reduces max ammo but increases accuracy
      * Gojo: Aura farms and does nothing
      * Final exam: get asked 3 questions about your current stats; gain rewards based on questions correct
      * The Alchemist: Exchange HP for DMG boost
      * Hungry Car: Give HP to feed the cat, difficulty gets reduced by 1
-     * Server Admin Lynn: Heals player to max health
+     * Server Admin Lynn: Either doubles health, takes health, or leaves you alone
      */
     private String[] posNames = new String[]{"Jax", "Incomplete Chess Set", "Gojo Satoru", "Final Exam", "The Alchemist", "A Hungry Cat", "Server Admin Lynn"};
     public int ID;
@@ -158,7 +158,7 @@ public class Occurrence {
         int lostHp;
 
         System.out.println("You are graced with the angelic presence of Lynn... the background music suddenly plays.");
-        System.out.println("1. Let Lynn inspect you (Chance to gain 100% HP or lose 50% HP). 2. Wave her off (Chance to lose 30% HP).");
+        System.out.println("1. Let Lynn inspect you (Chance to gain 100% HP or lose 50% HP).\n2. Wave her off (Chance to lose 30% HP).");
 
         playerChoice = GameMainDrive.intChoice(2);
 
