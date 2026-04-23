@@ -5,9 +5,9 @@ import java.util.Random;
 public class Entity  {
 
     private final Random RNG = new Random();
-    private final static String[] possibleNames = new String[] {"Ratora","Resill","Lord Fardquaad","Kubis","Hungry Caterpillar","Strange Bird", "Jax", "A Living Room", "Deer-headed Man", "Homunculus"};
-    private final static int[] possibleBaseDMG = new int[] {     1,             2,      1,               3,                 1};
-    private final static int[] possibleBaseHP = new int[] {      2,             2,      999,             4,                 3};
+    private final static String[] possibleNames = new String[] {"Ratora","Resill","Lord Fardquaad","Kubis","Hungry Caterpillar","Strange Bird", "Jamie", "A Living Room", "Deer-headed Man", "Homunculus"};
+    private final static int[] possibleBaseDMG = new int[] {    1,        3,       1,              2,       2,                   1,             2,     1,               3,                 1};
+    private final static int[] possibleBaseHP = new int[] {     4,        5,       5,              3,       4,                   3,             3,     999,             5,                 4};
 
     public String name;
     public int baseDmg;

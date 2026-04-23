@@ -23,11 +23,17 @@ public class GameMainDrive {
                 roomChoice = intChoice(3);
 
                 System.out.printf("You go to the %s...\n", roomList[roomChoice - 1].getName());
+                eepy(500);
 
-                Event thisEvent = roomList[roomChoice].enterRoom();
+                // Enter a room and check if it is a fight or occurrence
+                Event thisEvent = roomList[roomChoice - 1].enterRoom();
                 if (thisEvent.fightOrOccurrence == 0) {
                     fight(thisEvent.containedFight);
+                } else {
+                   occur(thisEvent.containedOccurrence);
                 }
+
+                you.difficulty += 1;
 
             }
 
@@ -44,15 +50,29 @@ public class GameMainDrive {
     }
 
     /**
+     * Helper method that makes the game pause for x milliseconds
+     */
+    public static void eepy(int time) {
+
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException ignored) {
+
+        }
+    }
+
+    /**
     This method plays the intro and asks for a name, this is called when the game starts or
     the player dies.
      */
     public static Player gameIntro() {
 
         System.out.println("---------NO-MUSCLE---------");
+        eepy(1000);
         System.out.println("A CLI game inspired by NO-SKIN by NOEYE SOFT");
         System.out.println("Made for CMSC 255 by Jax, Jamie, Lynn, Caique, Angelique, and Haya");
         System.out.println("");
+        eepy(1000);
         System.out.print("Enter a player name to start: ");
 
         Player you = new Player(strChoice());
@@ -77,30 +97,63 @@ public class GameMainDrive {
         return userIn.nextLine();
     }
 
+    /**
+     * This plays when entering a fight
+     * @param yourOpp
+     */
     public static void fight(Entity yourOpp) {
 
         boolean inFight = true;
         int turnAction = 0;
+        int turnsTaken = 0;
 
         while (inFight) {
 
-            System.out.println("===========================================================");
+            System.out.print("===========================================================");
             System.out.printf("\n%s stands before you. ", yourOpp.name);
             yourOpp.printHP();
+            eepy(500);
 
             System.out.print("\nWhat do you do? ");
             you.printHP();
+            eepy(500);
 
-            System.out.printf("1. Use Knife (%d Damage, %f Accuracy)\n2. Use Gun (%d Damage, %f Accuracy)\n3. Reload Gun (%d/%d Ammo)\n4. Defend (Reduce damage taken to 1 this turn)\n5. Run\n",
-                    you.getBaseDmg(), you.getBaseAcc(), (int)Math.ceil(you.getBaseDmg() * 1.8), you.getBaseAcc() - .1, you.getAmmo(), you.maxAmmo);
+            System.out.printf("1. Use Knife (%d Damage, %.0f Accuracy)\n2. Use Gun (%d Damage, %.0f Accuracy)\n3. Reload Gun (%d/%d Ammo)\n4. Defend (Reduce damage taken to 1 this turn)\n5. Run\n",
+                    you.getBaseDmg(), you.getBaseAcc() * 100, (int)Math.ceil(you.getBaseDmg() * 1.8), (you.getBaseAcc() - .1) * 100, you.getAmmo(), you.maxAmmo);
 
             turnAction = intChoice(5);
 
+            if (yourOpp.currentHP <= 0) {
+
+                inFight = false;
+
+            } else {
+
+                you.changeHealth(yourOpp.attackPlayer());
+                turnsTaken += 1;
+
+            }
+
+            if (you.getHealth() <= 0) {
+                return;
+            }
+        }
+
+        System.out.printf("%s defeated!\n", yourOpp.name);
+
+        int fightDiff = (int)Math.ceil((yourOpp.baseDmg + yourOpp.baseHP) + (turnsTaken / 2));
+
+        if (fightDiff < (3 * you.getDifficulty())) {
+
+            System.out.println("The fight was a breeze, healed 1 HP");
+            you.changeHealth(1);
 
         }
     }
 
-    public void enterRoom(Room entered) {
+    public void occur(Occurrence gambleRoom) {
+
+        gambleRoom.
 
     }
 
