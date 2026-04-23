@@ -1,19 +1,22 @@
 package NoMuscle;
+
 /*
 Name: Jamieson Moore
- */
+*/
+
 import java.util.Random;
 
 public class Room {
 
-    private Random RNG = new Random();
-    private RoomNames name;
-    private Event[] eventsInside;
-    private double[] eventProbs;
+    private final Random RNG = new Random();
+    private final RoomNames name;
+    private final Event[] eventsInside;
+    private final double[] eventProbs;
 
-    //  Default constructor (for driver obv)
+    // Default constructor (used by driver)
     public Room() {
-        this.name = RoomNames.values()[RNG.nextInt(RoomNames.values().length - 1)];
+        // FIXED: removed "- 1" so all room names are possible
+        this.name = RoomNames.values()[RNG.nextInt(RoomNames.values().length)];
 
         Event e1 = new Event(RNG.nextInt(4));
         Event e2 = new Event(RNG.nextInt(4));
@@ -23,9 +26,18 @@ public class Room {
         this.eventProbs = new double[]{0.33, 0.33, 0.34};
     }
 
-    // Main constructor
+    // Main constructor (clean and safe I hope)
     public Room(Event[] eventsInside, double[] eventProbs) {
-        this.name = RoomNames.values()[RNG.nextInt(RoomNames.values().length - 1)];
+
+        if (eventsInside == null || eventProbs == null) {
+            throw new IllegalArgumentException("Events or probabilities cannot be null");
+        }
+
+        if (eventsInside.length != 3 || eventProbs.length != 3) {
+            throw new IllegalArgumentException("Room must have exactly 3 events");
+        }
+
+        this.name = RoomNames.values()[RNG.nextInt(RoomNames.values().length)];
         this.eventsInside = eventsInside;
         this.eventProbs = eventProbs;
     }
@@ -43,8 +55,7 @@ public class Room {
     }
 
     public Event enterRoom() {
-        double randomValue = RNG.nextDouble();
-
+        double randomValue = Math.random();
         double cumulative = 0;
 
         for (int i = 0; i < eventProbs.length; i++) {
@@ -55,5 +66,10 @@ public class Room {
         }
 
         return eventsInside[0]; // fallback
+    }
+
+    @Override
+    public String toString() {
+        return "Room: " + name + " | Events: " + eventsInside.length;
     }
 }
