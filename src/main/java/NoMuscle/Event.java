@@ -10,8 +10,7 @@ public class Event {
     public int fightOrOccurrence;
 
     /**
-     * Event class with no parameters - throws illegal argument exception
-     * because event MUST have parameters
+     * Event class with no parameters; event MUST have parameters
      */
     public Event() {
         System.out.println("Event must have parameter >:(");
@@ -26,9 +25,7 @@ public class Event {
     public Event(int probCoefficient) {
         this.probCoefficient = probCoefficient;
 
-        /**
-         * determines if the new event will have a fight or occurrence
-         */
+        //determines if the new event will have a fight or occurrence
 
         this.fightOrOccurrence = RNG.nextInt(2);
         if (fightOrOccurrence == 0) {
