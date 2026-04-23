@@ -6,12 +6,17 @@ public class GameMainDrive {
     static Player you = GameMainDrive.gameIntro();
 
     public static void main(String[] args) {
+
         boolean keepPlaying = true;
         int roomChoice = 0;
 
         while (keepPlaying) {
 
             while (you.health > 0) {
+
+                you.printProgress();
+
+                eepy(1000);
 
                 Room[] roomList = new Room[] {new Room(), new Room(), new Room()};
 
@@ -23,7 +28,7 @@ public class GameMainDrive {
                 roomChoice = intChoice(3);
 
                 System.out.printf("You go to the %s...\n", roomList[roomChoice - 1].getName());
-                eepy(500);
+                eepy(1000);
 
                 // Enter a room and check if it is a fight or occurrence
                 Event thisEvent = roomList[roomChoice - 1].enterRoom();
@@ -33,7 +38,10 @@ public class GameMainDrive {
                    occur(thisEvent.containedOccurrence);
                 }
 
+                eepy(1000);
+
                 you.difficulty += 1;
+                you.progress += 1;
 
             }
 
@@ -123,13 +131,35 @@ public class GameMainDrive {
 
             turnAction = intChoice(5);
 
+            switch (turnAction) {
+                case 1:
+                    yourOpp.getAttacked(you.attackKnife());
+                    break;
+                case 2:
+                    yourOpp.getAttacked(you.attackGun());
+                    break;
+                case 3:
+                    you.reload();
+                    break;
+                case 4:
+                    System.out.println("You ready yourself for an attack...");
+                    break;
+                case 5:
+                    if (you.escape()) {
+                        return;
+                    }
+                    break;
+            }
+
+            eepy(1000);
+
             if (yourOpp.currentHP <= 0) {
 
                 inFight = false;
 
             } else {
 
-                you.changeHealth(yourOpp.attackPlayer());
+                you.changeHealth(-1 * yourOpp.attackPlayer());
                 turnsTaken += 1;
 
             }
@@ -169,11 +199,14 @@ public class GameMainDrive {
                 break;
 
             case 4:
+                gambleRoom.hungryCat(you);
                 
         }
 
 
     }
+
+
 
 
 }

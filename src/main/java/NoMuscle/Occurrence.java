@@ -56,8 +56,10 @@ public class Occurrence {
 
         System.out.println("You pass Jax as you explore, they hand you a small chocolate.");
         System.out.println("\"HEY HEY HEY, WHERE'S THE CHOCOLATE AT?\"");
-        you.printHP();
 
+        GameMainDrive.eepy(1000);
+
+        you.printHP();
         System.out.println("1. Eat the chocolate (lose or gain random HP)\n2. Pocket the chocolate (Lose 1 HP)");
 
         // Asks the player for their choice
@@ -92,6 +94,9 @@ public class Occurrence {
 
         System.out.println("In the room, you see a sad looking chess set with missing pieces.");
         System.out.println("You look in your bag, the closes thing to a chess piece is your ammo.");
+
+        GameMainDrive.eepy(1000);
+
         System.out.println("Your current max ammo is " + you.maxAmmo + " and your current accuracy is " + (int)(you.baseAcc * 100));
         System.out.println("1. Fill in the missing pieces with bullets (Lose 1 max ammo, gain 10 accuracy)\n2. Leave");
 
@@ -108,7 +113,12 @@ public class Occurrence {
     public void Gojo(Player you) {
 
         System.out.println("Gojo stands before you, his really awesome aura is quite overwhelming.");
+
+        GameMainDrive.eepy(10000);
+
         System.out.println("You stand there in awe and waste your time glazing him. (Nothing happens)");
+
+        GameMainDrive.eepy(500);
 
     }
 
@@ -126,6 +136,9 @@ public class Occurrence {
         int lostHp;
 
         System.out.println("A stray cat wanders toward you with an empty bowl, you hear its stomach growl.");
+
+        GameMainDrive.eepy(500);
+
         System.out.println("1. Feed the cat (Lose 10% of your HP, reduce difficulty by 1).\n2. Don't feed the cat. (Nothing happens)");
 
         playerChoice = GameMainDrive.intChoice(2);

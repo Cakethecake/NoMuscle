@@ -6,17 +6,50 @@ public class Entity  {
 
     private final Random RNG = new Random();
     private final static String[] possibleNames = new String[] {"Ratora","Resill","Lord Fardquaad","Kubis","Hungry Caterpillar","Strange Bird", "Jamie", "A Living Room", "Deer-headed Man", "Homunculus"};
-    private final static int[] possibleBaseDMG = new int[] {    1,        3,       1,              2,       2,                   1,             2,     1,               3,                 1};
-    private final static int[] possibleBaseHP = new int[] {     4,        5,       5,              3,       4,                   3,             3,     999,             5,                 4};
+    private final static int[] possibleBaseDMG = new int[] {    2,        3,       1,              2,       1,                   1,             2,     1,                 3,                 1};
+    private final static int[] possibleBaseHP = new int[] {     4,        5,       5,              3,       4,                   3,             3,     999,               5,                 4};
 
     public String name;
     public int baseDmg;
     public int baseHP;
     public int currentHP;
     private int ID;
+    public boolean charging;
 
     public int attackPlayer() {
-        return baseDmg;
+
+        if (((currentHP < 3) || (RNG.nextDouble() < .6)) && charging == false) {
+            System.out.println(name + " Attacks dealing " + baseDmg + " DMG!");
+            return baseDmg;
+        }
+
+        if ((GameMainDrive.you.difficulty > 2 && charging == false && (RNG.nextDouble() < .5)) && ID != 7) {
+            System.out.println(name + " Is charging a powerful attack!");
+            charging = true;
+            return 0;
+        }
+
+        if (charging == true) {
+            System.out.println(name + " unleashes a powerful attack dealing " + ((int) Math.ceil(baseDmg * 1.7)) + " DMG!!");
+            if (ID == 4) {
+                System.out.println(name + " heals for 2 HP!");
+                currentHP += 2;
+            }
+
+            charging = false;
+
+            return (int) Math.ceil(baseDmg * 1.7);
+        }
+
+        if (ID == 9) {
+            System.out.println(name + " heals for 1 HP");
+            currentHP += 1;
+            return 0;
+        }
+
+        System.out.println(name + " is waiting...");
+        return 0;
+
     }
 
     public void getAttacked(int dmg) {
@@ -51,8 +84,8 @@ public class Entity  {
             ID = RNG.nextInt(possibleNames.length);
 
             name = possibleNames[ID];
-            baseDmg = (int) Math.ceil(possibleBaseDMG[ID] * difficulty * .8);
-            baseHP = (int) Math.ceil(possibleBaseHP[ID] * difficulty * .8);
+            baseDmg = (int) Math.ceil(possibleBaseDMG[ID] * difficulty * .2);
+            baseHP = (int) Math.ceil(possibleBaseHP[ID] * difficulty * .5);
             currentHP = baseHP;
 
         } else {
