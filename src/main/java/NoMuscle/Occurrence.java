@@ -111,6 +111,14 @@ public class Occurrence {
 
     }
 
+    public void finalExam(Player you) {
+
+    }
+
+    public void theAlchemist(Player you) {
+
+    }
+
     public void hungryCat(Player you) {
 
         int playerChoice;
@@ -124,7 +132,7 @@ public class Occurrence {
         // If first choice is chosen, lose 10% HP and reduce difficulty by 1
         if (playerChoice == 1) {
 
-            lostHp = (int)(you.getHealth() * 0.1);
+            lostHp = (int)Math.ceil(you.getHealth() * 0.1);
 
             System.out.println("You feed the cat and lose " + lostHp + " HP.");
 
