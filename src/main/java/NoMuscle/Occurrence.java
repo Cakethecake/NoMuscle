@@ -10,8 +10,9 @@ public class Occurrence {
      * Final exam: get asked 3 questions about your current stats; gain rewards based on questions correct
      * The Alchemist: Exchange HP for DMG boost
      * Hungry Car: Give HP to feed the cat, difficulty gets reduced by 1
+     * Server Admin Lynn: Heals player to max health
      */
-    private String[] posNames = new String[]{"Jax", "Incomplete Chess Set", "Gojo Satoru", "Final Exam", "The Alchemist", "A Hungry Cat"};
+    private String[] posNames = new String[]{"Jax", "Incomplete Chess Set", "Gojo Satoru", "Final Exam", "The Alchemist", "A Hungry Cat", "Server Admin Lynn"};
     public int ID;
     protected String name;
     private static Random RNG = new Random();
@@ -149,5 +150,47 @@ public class Occurrence {
             System.out.println("The cat faints from hunger and you move on... (how could you).");
         }
 
+    }
+
+    public void adminLynn(Player you) {
+
+        int playerChoice;
+        int lostHp;
+
+        System.out.println("You are graced with the angelic presence of Lynn... the background music suddenly plays.");
+        System.out.println("1. Let Lynn inspect you (Chance to gain 100% HP or lose 50% HP). 2. Wave her off (Chance to lose 30% HP).");
+
+        playerChoice = GameMainDrive.intChoice(2);
+
+        if (playerChoice == 1) {
+
+            // 50/50 chance to be healed or lose hp - MIGHT change to 75/25 but not sure
+            if (RNG.nextBoolean()) {
+
+                // If true
+                System.out.println("Lynn seems to like you, she patches you up! Gained 2x HP");
+                you.changeHealth(you.getHealth());
+
+            } else {
+                lostHp = (int)Math.ceil(you.getHealth() * 0.5);
+                System.out.println("Lynn gives you a nasty look, she finds something deeply wrong with you. You lose " + lostHp + " HP.");
+
+                you.changeHealth(-1 * lostHp);
+            }
+        } else {
+
+            if (RNG.nextBoolean()) {
+
+                // If true
+                lostHp = (int)Math.ceil(you.getHealth() * 0.3);
+                System.out.println("She looks offended and smacks you, you lose " + lostHp + " HP.");
+
+                you.changeHealth(-1 * lostHp);
+            } else {
+                System.out.println("Lynn surprisingly shrugs it off and flies back up, lose 0 HP. You got lucky...");
+
+            }
+
+        }
     }
 }
