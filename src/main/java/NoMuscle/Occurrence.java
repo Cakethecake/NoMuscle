@@ -21,8 +21,6 @@ public class Occurrence {
         ID = RNG.nextInt(posNames.length - 1);
         this.name = posNames[ID];
 
-
-
     }
 
     public boolean canGive(Player player) {
@@ -56,7 +54,7 @@ public class Occurrence {
         int playerChoice;
 
         System.out.println("You pass Jax as you explore, they hand you a small chocolate.");
-        System.out.println("\"HEY HEY HEY, WHERES'S THE CHOCOLATE AT?\"");
+        System.out.println("\"HEY HEY HEY, WHERE'S THE CHOCOLATE AT?\"");
         you.printHP();
 
         System.out.println("1. Eat the chocolate (lose or gain random HP)\n2. Pocket the chocolate (Lose 1 HP)");
@@ -84,5 +82,44 @@ public class Occurrence {
             you.changeHealth(-1);
 
         }
+    }
+
+    public void Gojo() {
+
+        System.out.println("Gojo stands before you, his really awesome aura is quite overwhelming.");
+        System.out.println("You stand there in awe and waste your time glazing him. (Nothing happens)");
+
+    }
+
+    public void hungryCat(Player you) {
+
+        int playerChoice;
+        int lostHp;
+
+        System.out.println("A stray cat wanders toward you with an empty bowl, you hear its stomach growl.");
+        System.out.println("1. Feed the cat (Lose 10% of your HP, reduce difficulty by 1).\n2. Don't feed the cat. (Nothing happens(?))");
+
+        playerChoice = GameMainDrive.intChoice(2);
+
+        // If first choice is chosen, lose 10% HP and reduce difficulty by 1
+        if (playerChoice == 1) {
+
+            lostHp = (int)(you.getHealth() * 0.1);
+
+            System.out.println("You feed the cat and lose " + lostHp + " HP.");
+
+            you.changeHealth(-1 * lostHp);
+
+            System.out.println("The cat is very grateful and purrs at your leg. Your difficulty is reduced by 1.");
+
+            // Avoids game crash if difficulty is 1
+            if (you.difficulty > 0) {
+                you.difficulty -= 1;
+            }
+
+        } else {
+            System.out.println("The cat faints and you move on (how could you).");
+        }
+
     }
 }
