@@ -10,7 +10,8 @@ public class Player {
     public int difficulty;
     public int ammo;
     public int maxAmmo;
-    private Random RNG;
+    private Random RNG = new Random();
+    public int progress;
 
     public Player() {
         System.out.println("please do not use a blank player!!!");
@@ -23,8 +24,9 @@ public class Player {
     public Player(String pName) {
 
         name = pName;
+        progress = 0;
 
-        if (name.equals("Debug")) {
+        if (name.equals("Debug") || name.equals("Silver Wolf")) {
             System.out.println("Debug mode activated !!!!!!!!!!!!!!!!!!");
             health = 999;
             baseDmg = 999;
@@ -90,19 +92,19 @@ public class Player {
 
     public int getDifficulty() { return  difficulty;}
 
-    public int attackKnife(Entity opp) {
+    public int attackKnife() {
         if (RNG.nextDouble() < this.getBaseAcc()) {
-            System.out.printf("Dealt %d", baseDmg);
+            System.out.printf("Dealt %d damage\n", baseDmg);
             return this.baseDmg;
         }
         System.out.println("Missed!");
         return 0;
     }
 
-    public int attackGun(Entity opp) {
+    public int attackGun() {
         if ((RNG.nextDouble() < this.getBaseAcc() - .1) && ammo > 0) {
 
-            System.out.printf("Dealt %d", (int) Math.ceil(baseDmg * 1.8));
+            System.out.printf("Dealt %d damage\n", (int) Math.ceil(baseDmg * 1.8));
 
             ammo -= 1;
 
@@ -117,6 +119,42 @@ public class Player {
 
         System.out.println("Missed!");
         return 0;
+    }
+
+    public boolean escape() {
+
+        if (RNG.nextDouble() < Math.pow(10, (-1 * (difficulty / 10)))) {
+
+            System.out.println("Escape successful!");
+            return true;
+
+        } else {
+
+            System.out.println("Escape failed!");
+            return false;
+
+        }
+    }
+
+    public void printProgress() {
+
+        System.out.println("Progress:");
+
+        System.out.print("=");
+
+        for (int i = 0; i < progress; i++) {
+
+            System.out.print("//");
+
+        }
+        for (int i = 10; i > progress; i--) {
+
+            System.out.print("--");
+
+        }
+        System.out.println("=");
+
+        System.out.println((progress * 10) + "%");
     }
 
 
