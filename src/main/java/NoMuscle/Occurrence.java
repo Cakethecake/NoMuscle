@@ -171,13 +171,16 @@ public class Occurrence {
         int lostHp;
 
         System.out.println("You are graced with the angelic presence of Lynn... the background music suddenly plays.");
+
+        GameMainDrive.eepy(500);
+
         System.out.println("1. Let Lynn inspect you (Chance to gain 100% HP or lose 50% HP).\n2. Wave her off (Chance to lose 30% HP).");
 
         playerChoice = GameMainDrive.intChoice(2);
 
         if (playerChoice == 1) {
 
-            // 50/50 chance to be healed or lose hp - MIGHT change to 75/25 but not sure
+            // 50/50 chance to be healed or lose hp
             if (RNG.nextBoolean()) {
 
                 // If true
@@ -200,7 +203,7 @@ public class Occurrence {
 
                 you.changeHealth(-1 * lostHp);
             } else {
-                System.out.println("Lynn surprisingly shrugs it off and flies back up, lose 0 HP. You got lucky...");
+                System.out.println("Lynn surprisingly shrugs it off and flies back up, your limbs are still in tact. You got lucky...");
 
             }
 
