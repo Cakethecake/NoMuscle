@@ -43,6 +43,21 @@ public class GameMainDrive {
                 you.difficulty += 1;
                 you.progress += 1;
 
+                if (you.progress % 3 == 0) {
+
+                    System.out.println("You stop and rest, healing 2 HP");
+                    you.changeHealth(2);
+
+                }
+                if (you.progress % 4 == 0) {
+
+                    System.out.println("You feel yourself getting stronger, DMG increased by 1");
+                    you.baseDmg += 1;
+
+                }
+
+
+
             }
 
             System.out.println("This is the end of everything... But not you.");
