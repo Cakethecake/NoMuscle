@@ -33,6 +33,9 @@ public class Event {
             containedOccurrence = null;
         } else {
             containedOccurrence = new Occurrence();
+            if (containedOccurrence.ID == 3 || containedOccurrence.ID == 6) {
+                probCoefficient -= 1;
+            }
             containedFight = null;
         }
     }
@@ -46,6 +49,13 @@ public class Event {
      */
     public int getProbCoefficient() {
         return probCoefficient;
+    }
+
+    public String toString() {
+        if (fightOrOccurrence == 0) {
+            return containedFight.name;
+        }
+        return containedOccurrence.name;
     }
 
 }

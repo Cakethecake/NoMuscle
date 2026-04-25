@@ -8,11 +8,11 @@ public class Occurrence {
      * Chess set: Reduces max ammo but increases accuracy
      * Gojo: Aura farms and does nothing
      * Final exam: get asked 3 questions about your current stats; gain rewards based on questions correct
-     * The Alchemist: Exchange HP for DMG boost
+     * The Alchemist: Exchange HP for DMG boost; exchange accuracy for HP
      * Hungry Car: Give HP to feed the cat, difficulty gets reduced by 1
      * Server Admin Lynn: Either doubles health, takes health, or leaves you alone
      */
-    private String[] posNames = new String[]{"Jax", "Incomplete Chess Set", "Gojo Satoru", "Final Exam", "The Alchemist", "A Hungry Cat", "Server Admin Lynn"};
+    private String[] posNames = new String[]{"Jax", "An Incomplete Chess Set", "Gojo Satoru", "Your Final Exam", "The Alchemist", "A Hungry Cat", "Server Admin Lynn"};
     public int ID;
     protected String name;
     private static Random RNG = new Random();
@@ -124,6 +124,60 @@ public class Occurrence {
 
     public void finalExam(Player you) {
 
+        int latestChoice;
+        int score = 0;
+
+        System.out.println("As you walk in, everyone in the room turns to look at you.");
+        GameMainDrive.eepy(200);
+        System.out.println("Someone hands you a piece of paper labeled \"FINAL EXAM\" and points you to an empty desk.");
+        GameMainDrive.eepy(1000);
+
+        // Clears the terminal
+        for (int i = 0; i < 100; i++) {
+            System.out.println();
+        }
+
+        System.out.println("Question 1:\nWhat is your current HP?");
+        latestChoice = GameMainDrive.intChoice(you.getHealth() + 10);
+        if (latestChoice == you.getHealth()) {
+            score += 1;
+        }
+
+        System.out.println("Question 2:\nHow many bullets are in your gun?");
+        latestChoice = GameMainDrive.intChoice(you.getAmmo() + 10);
+        if (latestChoice == you.getAmmo()) {
+            score += 1;
+        }
+
+        System.out.println("Question 3:\nHow many times have you fed the cat?");
+        latestChoice = GameMainDrive.intChoice(you.catFood + 10);
+        if (latestChoice == you.catFood) {
+            score += 1;
+        }
+
+        GameMainDrive.eepy(500);
+
+        switch (score) {
+            case 0:
+                System.out.println("You failed!");
+                GameMainDrive.eepy(500);
+                System.out.println("A crushing sense of guilt washes over you. You lose 90% of your HP!");
+                you.changeHealth(-1 * (int)Math.floor(you.getHealth() * .9));
+                break;
+            case 3:
+                System.out.println("You got everything correct! Well done!");
+                GameMainDrive.eepy(500);
+                System.out.println("You heal for 50% of your current HP and your DMG increases by 1!");
+                you.changeHealth((int)Math.floor(you.getHealth() * .50));
+                break;
+            default:
+                System.out.println("You got something correct...");
+                GameMainDrive.eepy(500);
+                System.out.println("You heal for 1 HP and increase your accuracy by 10%!");
+                you.changeHealth(1);
+                you.baseAcc += .1;
+                break;
+        }
         
 
     }
@@ -155,6 +209,8 @@ public class Occurrence {
             you.changeHealth(-1 * lostHp);
 
             System.out.println("The cat is very grateful and purrs at your leg. Your difficulty is reduced by 1.");
+
+            you.catFood += 1;
 
             // Avoids game crash if difficulty is 1
             if (you.difficulty > 0) {

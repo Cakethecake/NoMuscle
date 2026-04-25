@@ -20,10 +20,30 @@ public class GameMainDrive {
 
                 Room[] roomList = new Room[] {new Room(), new Room(), new Room()};
 
-                System.out.println("Three rooms are before you.");
+                System.out.println("Three rooms are before you. Each has three possibilities within.");
                 System.out.println();
+                eepy(200);
 
-                System.out.printf("1. %s\t2. %s\t 3. %s\nWhere are you pulled to? (Enter the room number): \n", roomList[0].getName(), roomList[1].getName(), roomList[2].getName());
+                for (int i = 0; i < 3; i++) {
+                    System.out.print((i + 1)+ ") " + roomList[i].getName());
+
+                    for (int j = 0; j < 3; j++) {
+                        System.out.printf("\n\t%.0f%%: ", roomList[i].getEventProbs()[j] * 100);
+                        if (roomList[i].getEventsInside()[j].fightOrOccurrence == 0) {
+                            System.out.print("Fight ");
+                        } else {
+                            System.out.print ("Encounter ");
+                        }
+                        System.out.print(roomList[i].getEventsInside()[j].toString());
+
+                    }
+
+                    System.out.println();
+
+                }
+
+                System.out.println("Where are you pulled to? (Enter room number)");
+
 
                 roomChoice = intChoice(3);
 
@@ -223,21 +243,33 @@ public class GameMainDrive {
         // Chooses the occurrence based on the ID it has.
         // TODO: Implement the rest of these
         switch (gambleRoom.ID) {
-            case 1:
+            case 0:
                 gambleRoom.Jax(you);
                 break;
 
-            case 2:
+            case 1:
                 gambleRoom.Chess(you);
                 break;
 
-            case 3:
+            case 2:
                 gambleRoom.Gojo(you);
                 break;
 
+            case 3:
+                gambleRoom.finalExam(you);
+                break;
+
             case 4:
+                gambleRoom.theAlchemist(you);
+                break;
+
+            case 5:
                 gambleRoom.hungryCat(you);
-                
+                break;
+
+            case 6:
+                gambleRoom.adminLynn(you);
+                break;
         }
 
 

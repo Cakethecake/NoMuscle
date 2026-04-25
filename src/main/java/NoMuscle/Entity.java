@@ -5,9 +5,10 @@ import java.util.Random;
 public class Entity  {
 
     private final Random RNG = new Random();
-    private final static String[] possibleNames = new String[] {"Ratora","Resill","Lord Fardquaad","Kubis","Hungry Caterpillar","Strange Bird", "Jamie", "A Living Room", "Deer-headed Man", "Homunculus"};
-    private final static int[] possibleBaseDMG = new int[] {    2,        3,       1,              2,       1,                   1,             2,     1,                 3,                 1};
-    private final static int[] possibleBaseHP = new int[] {     4,        5,       5,              3,       4,                   3,             3,     999,               5,                 4};
+    //                                                      IDs: 0        1        2                3       4                    5              6        7                8                  9
+    private final static String[] possibleNames = new String[] {"Ratora","Resill","Lord Fardquaad","Kubis","A Hungry Caterpillar","A Strange Bird", "Jamie", "A Living Room", "Deer-headed Man", "Homunculus"};
+    private final static int[] possibleBaseDMG = new int[] {    2,        3,       1,              2,       1,                   1,             2,       1,               3,                 1};
+    private final static int[] possibleBaseHP = new int[] {     4,        5,       5,              3,       4,                   3,             3,       999,             5,                 4};
 
     public String name;
     public int baseDmg;
@@ -81,7 +82,10 @@ public class Entity  {
          */
         if (!isFinalFight) {
 
-            ID = RNG.nextInt(possibleNames.length);
+            // Selects an enemy ID, banning certain hard enemies at low difficulty
+            do {
+                ID = RNG.nextInt(possibleNames.length);
+            } while ((ID == 1 || ID == 4 || ID == 7 || ID == 8) && difficulty < 8);
 
             name = possibleNames[ID];
             baseDmg = (int) Math.ceil(possibleBaseDMG[ID] * difficulty * .1);

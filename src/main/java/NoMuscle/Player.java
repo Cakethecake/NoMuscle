@@ -13,6 +13,7 @@ public class Player {
     private Random RNG = new Random();
     public int progress;
     public boolean debug;
+    public int catFood;
 
     public Player() {
         System.out.println("please do not use a blank player!!!");

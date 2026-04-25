@@ -18,10 +18,22 @@ public class Room {
         // FIXED: removed "- 1" so all room names are possible
         this.name = RoomNames.values()[RNG.nextInt(RoomNames.values().length)];
 
-        // Changed: 0 does not apply.
-        Event e1 = new Event(RNG.nextInt(3) + 1);
-        Event e2 = new Event(RNG.nextInt(3) + 1);
-        Event e3 = new Event(RNG.nextInt(3) + 1);
+        Event e1, e2, e3;
+
+        // Creates events and makes sure the first is a fight,  they are all different, and all have descending probs
+
+        do {
+            e1 = new Event(6);
+        } while (e1.fightOrOccurrence == 1);
+
+        do {
+            e2 = new Event(RNG.nextInt(4) + 1);
+        } while (e2.toString().equals(e1.toString()) || e1.getProbCoefficient() <= e2.getProbCoefficient());
+
+        do {
+            e3 = new Event(RNG.nextInt(4) + 1);
+        } while (e3.toString().equals(e2.toString()) || e2.getProbCoefficient() < e3.getProbCoefficient());
+
 
         this.eventsInside = new Event[]{e1, e2, e3};
 
