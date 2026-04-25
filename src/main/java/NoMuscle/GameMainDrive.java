@@ -23,7 +23,7 @@ public class GameMainDrive {
                 System.out.println("Three rooms are before you.");
                 System.out.println();
 
-                System.out.printf("1. %s\t2. %s\t 3. %s\n Where are you pulled to? (Enter the room number): ", roomList[0].getName(), roomList[1].getName(), roomList[2].getName());
+                System.out.printf("1. %s\t2. %s\t 3. %s\nWhere are you pulled to? (Enter the room number): \n", roomList[0].getName(), roomList[1].getName(), roomList[2].getName());
 
                 roomChoice = intChoice(3);
 
@@ -56,7 +56,7 @@ public class GameMainDrive {
 
                 }
 
-
+                eepy(1000);
 
             }
 
@@ -132,7 +132,7 @@ public class GameMainDrive {
 
         while (inFight) {
 
-            System.out.print("===========================================================");
+            System.out.print("\n===========================================================");
             System.out.printf("\n%s stands before you. ", yourOpp.name);
             yourOpp.printHP();
             eepy(500);

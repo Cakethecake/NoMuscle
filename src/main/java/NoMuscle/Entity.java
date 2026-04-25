@@ -19,20 +19,20 @@ public class Entity  {
     public int attackPlayer() {
 
         if (((currentHP < 3) || (RNG.nextDouble() < .6)) && charging == false) {
-            System.out.println(name + " Attacks dealing " + baseDmg + " DMG!");
+            System.out.println(name + " Attacks dealing " + baseDmg + " DMG!\n");
             return baseDmg;
         }
 
         if ((GameMainDrive.you.difficulty > 2 && charging == false && (RNG.nextDouble() < .5)) && ID != 7) {
-            System.out.println(name + " Is charging a powerful attack!");
+            System.out.println(name + " Is charging a powerful attack!\n");
             charging = true;
             return 0;
         }
 
         if (charging == true) {
-            System.out.println(name + " unleashes a powerful attack dealing " + ((int) Math.ceil(baseDmg * 1.7)) + " DMG!!");
+            System.out.println(name + " unleashes a powerful attack dealing " + ((int) Math.ceil(baseDmg * 1.7)) + " DMG!!\n");
             if (ID == 4) {
-                System.out.println(name + " heals for 2 HP!");
+                System.out.println(name + " heals for 2 HP!\n");
                 currentHP += 2;
             }
 
@@ -42,12 +42,12 @@ public class Entity  {
         }
 
         if (ID == 9) {
-            System.out.println(name + " heals for 1 HP");
+            System.out.println(name + " heals for 1 HP\n");
             currentHP += 1;
             return 0;
         }
 
-        System.out.println(name + " is waiting...");
+        System.out.println(name + " is waiting...\n");
         return 0;
 
     }

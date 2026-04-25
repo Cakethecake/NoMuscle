@@ -26,7 +26,7 @@ public class Player {
         name = pName;
         progress = 0;
 
-        if (name.equals("Debug") || name.equals("Silver Wolf")) {
+        if (name.equals("Silver Wolf")) {
             System.out.println("Debug mode activated !!!!!!!!!!!!!!!!!!");
             health = 999;
             baseDmg = 999;
@@ -94,17 +94,17 @@ public class Player {
 
     public int attackKnife() {
         if (RNG.nextDouble() < this.getBaseAcc()) {
-            System.out.printf("Dealt %d damage\n", baseDmg);
+            System.out.printf("Dealt %d damage\n\n", baseDmg);
             return this.baseDmg;
         }
-        System.out.println("Missed!");
+        System.out.println("Missed!\n\n");
         return 0;
     }
 
     public int attackGun() {
         if ((RNG.nextDouble() < this.getBaseAcc() - .1) && ammo > 0) {
 
-            System.out.printf("Dealt %d damage\n", (int) Math.ceil(baseDmg * 1.8));
+            System.out.printf("Dealt %d damage\n\n", (int) Math.ceil(baseDmg * 1.8));
 
             ammo -= 1;
 
@@ -112,12 +112,12 @@ public class Player {
 
         } else if (ammo == 0) {
 
-            System.out.println("Out of ammo! You need to reload!");
+            System.out.println("Out of ammo! You need to reload!\n\n");
             return 0;
 
         }
 
-        System.out.println("Missed!");
+        System.out.println("Missed!\n\n");
         return 0;
     }
 
@@ -138,7 +138,7 @@ public class Player {
 
     public void printProgress() {
 
-        System.out.println("Progress:");
+        System.out.println("\nProgress:");
 
         System.out.print("=");
 
@@ -154,7 +154,7 @@ public class Player {
         }
         System.out.println("=");
 
-        System.out.println((progress * 10) + "%");
+        System.out.println((progress * 10) + "%\n");
     }
 
 
