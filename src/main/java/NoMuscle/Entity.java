@@ -84,7 +84,7 @@ public class Entity  {
             ID = RNG.nextInt(possibleNames.length);
 
             name = possibleNames[ID];
-            baseDmg = (int) Math.ceil(possibleBaseDMG[ID] * difficulty * .15);
+            baseDmg = (int) Math.ceil(possibleBaseDMG[ID] * difficulty * .1);
             baseHP = (int) Math.ceil(possibleBaseHP[ID] * difficulty * .4);
             currentHP = baseHP;
 

@@ -40,9 +40,13 @@ public class GameMainDrive {
 
                 eepy(1000);
 
+                // Increases the difficulty and increments game progress when the player finishes a room.
+                // These must be tracked separately because of the Hungry Cat occurrence
                 you.difficulty += 1;
                 you.progress += 1;
 
+                // Heals the player or increases their DMG every 3 and 4 stages respectively.
+                // This is the only thing holding back awful balancing issues.
                 if (you.progress % 3 == 0) {
 
                     System.out.println("You stop and rest, healing 2 HP");
@@ -130,13 +134,22 @@ public class GameMainDrive {
         int turnAction = 0;
         int turnsTaken = 0;
 
+
+        //Loop through this on every turn of the fight
         while (inFight) {
 
             System.out.print("\n===========================================================");
             System.out.printf("\n%s stands before you. ", yourOpp.name);
             yourOpp.printHP();
+
+            // ONLY SHOWS IF IN DEBUG MODE
+            if (you.debug) {
+                System.out.println("Debug: Enemy has " + yourOpp.baseDmg + " base dmg");
+            }
+
             eepy(500);
 
+            // Present player options
             System.out.print("\nWhat do you do? ");
             you.printHP();
             eepy(500);
@@ -146,6 +159,7 @@ public class GameMainDrive {
 
             turnAction = intChoice(5);
 
+            // Take the player's action
             switch (turnAction) {
                 case 1:
                     yourOpp.getAttacked(you.attackKnife());
@@ -157,6 +171,7 @@ public class GameMainDrive {
                     you.reload();
                     break;
                 case 4:
+                    // Currently unimplemented
                     System.out.println("You ready yourself for an attack...");
                     break;
                 case 5:
@@ -168,6 +183,7 @@ public class GameMainDrive {
 
             eepy(1000);
 
+            // Checks if your enemy is dead. If not, they can act
             if (yourOpp.currentHP <= 0) {
 
                 inFight = false;
@@ -179,11 +195,15 @@ public class GameMainDrive {
 
             }
 
+
+            // Checks if you are dead and ends the battle if so
             if (you.getHealth() <= 0) {
                 return;
             }
         }
 
+
+        // Uses a mediocre formula to determine the difficulty of the battle and rewards the player based on it
         System.out.printf("%s defeated!\n", yourOpp.name);
 
         int fightDiff = (int)Math.ceil((yourOpp.baseDmg + yourOpp.baseHP) + (turnsTaken / 2));
@@ -200,6 +220,8 @@ public class GameMainDrive {
 
         eepy(500);
 
+        // Chooses the occurrence based on the ID it has.
+        // TODO: Implement the rest of these
         switch (gambleRoom.ID) {
             case 1:
                 gambleRoom.Jax(you);

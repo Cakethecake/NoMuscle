@@ -12,6 +12,7 @@ public class Player {
     public int maxAmmo;
     private Random RNG = new Random();
     public int progress;
+    public boolean debug;
 
     public Player() {
         System.out.println("please do not use a blank player!!!");
@@ -27,14 +28,23 @@ public class Player {
         progress = 0;
 
         if (name.equals("Silver Wolf")) {
-            System.out.println("Debug mode activated !!!!!!!!!!!!!!!!!!");
             health = 999;
             baseDmg = 999;
             ammo = 999;
             maxAmmo = 999;
             baseAcc = 1;
             difficulty = 1;
-        } else {
+        } else if (name.equals("debug")) {
+            System.out.println("Debug mode activated !!");
+            debug = true;
+            health = 999;
+            baseDmg = 999;
+            ammo = 999;
+            maxAmmo = 999;
+            baseAcc = 1;
+            difficulty = 1;
+        }
+        else {
             health = 5;
             baseDmg = 1;
             ammo = 6;
@@ -147,14 +157,14 @@ public class Player {
             System.out.print("//");
 
         }
-        for (int i = 10; i > progress; i--) {
+        for (int i = 16; i > progress; i--) {
 
             System.out.print("--");
 
         }
         System.out.println("=");
 
-        System.out.println((progress * 10) + "%\n");
+        System.out.println((progress * 6.25) + "%\n");
     }
 
 
