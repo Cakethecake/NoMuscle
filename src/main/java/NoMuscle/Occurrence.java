@@ -24,32 +24,6 @@ public class Occurrence {
 
     }
 
-    public boolean canGive(Player player) {
-        return true;
-    }
-
-
-    public void extractCost(Player player) {
-
-    }
-
-    public void giveReward(Player player) {
-
-    }
-
-    public void doThing(Player player) {
-
-        System.out.println("Encounter:" + name);
-
-        if (canGive(player)) {
-            extractCost(player);
-            giveReward(player);
-
-        } else {
-            System.out.println("Cannot afford");
-        }
-    }
-
     public void Jax(Player you) {
 
         int playerChoice;
@@ -130,7 +104,7 @@ public class Occurrence {
         System.out.println("As you walk in, everyone in the room turns to look at you.");
         GameMainDrive.eepy(200);
         System.out.println("Someone hands you a piece of paper labeled \"FINAL EXAM\" and points you to an empty desk.");
-        GameMainDrive.eepy(1000);
+        GameMainDrive.eepy(2500);
 
         // Clears the terminal
         for (int i = 0; i < 100; i++) {
@@ -184,6 +158,29 @@ public class Occurrence {
 
     public void theAlchemist(Player you) {
 
+        int playerChoice;
+
+        System.out.println("A mysterious alchemist looks at you bashfully, it's Sucrose from Genshin Impact???"); // you can change this if u want, i wasnt sure what to do
+
+        GameMainDrive.eepy(500);
+
+        System.out.println("\"I can make you stronger... for a price.\"");
+
+        GameMainDrive.eepy(500);
+
+        System.out.println("1. Trade 2 HP for +1 DMG\n Trade 10% accuracy for 2 HP\n Decline the offer");
+
+        playerChoice = GameMainDrive.intChoice(3);
+
+        // TODO: finish this stuff
+        switch (playerChoice) {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
     }
 
     public void hungryCat(Player you) {

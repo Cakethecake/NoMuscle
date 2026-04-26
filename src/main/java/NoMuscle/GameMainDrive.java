@@ -3,10 +3,11 @@ import java.util.Scanner;
 
 public class GameMainDrive {
 
-    static Player you = GameMainDrive.gameIntro();
+    static Player you = new Player("first player run");
 
     public static void main(String[] args) {
 
+        you = GameMainDrive.gameIntro(); // Fixed a bug where it kept looping yes/no question + intro
         boolean keepPlaying = true;
         int roomChoice = 0;
 
@@ -85,10 +86,12 @@ public class GameMainDrive {
             }
 
             System.out.println("This is the end of everything... But not you.");
-            System.out.println("Would you like to play again? (yes / no");
+            System.out.println("Would you like to play again? (yes / no)");
 
             if (strChoice().equals("no")) {
                 keepPlaying = false;
+            } else {
+                you = GameMainDrive.gameIntro(); // Should properly reset the player
             }
 
         }
