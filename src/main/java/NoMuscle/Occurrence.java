@@ -1,6 +1,7 @@
 package NoMuscle;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class Occurrence {
     /** Occurrence happenings:
@@ -11,15 +12,20 @@ public class Occurrence {
      * The Alchemist: Exchange HP for DMG boost; exchange accuracy for HP
      * Hungry Car: Give HP to feed the cat, difficulty gets reduced by 1
      * Server Admin Lynn: Either doubles health, takes health, or leaves you alone
+     * Trailblazer Trashcan Obsession: Dig in trash for buffs
      */
-    private String[] posNames = new String[]{"Jax", "An Incomplete Chess Set", "Gojo Satoru", "Your Final Exam", "The Alchemist", "A Hungry Cat", "Server Admin Lynn"};
+    private String[] posNames = new String[] {
+            "Jax", "An Incomplete Chess Set", "Gojo Satoru", "Your Final Exam",
+            "The Alchemist", "A Hungry Cat", "Server Admin Lynn", "An Amazing Trashcan"
+            };
+
     public int ID;
     protected String name;
     private static Random RNG = new Random();
 
     public Occurrence() {
 
-        ID = RNG.nextInt(posNames.length - 1);
+        ID = RNG.nextInt(posNames.length); // Fixed: it wasn't getting the last occurrence in the array
         this.name = posNames[ID];
 
     }
@@ -72,7 +78,7 @@ public class Occurrence {
         GameMainDrive.eepy(1000);
 
         System.out.println("Your current max ammo is " + you.maxAmmo + " and your current accuracy is " + (int)(you.baseAcc * 100));
-        System.out.println("1. Fill in the missing pieces with bullets (Lose 1 max ammo, gain 10 accuracy)\n2. Leave");
+        System.out.println("1. Fill in the missing pieces with bullets (Lose 1 max ammo, gain 10% accuracy)\n2. Leave");
 
         playerChoice = GameMainDrive.intChoice(2);
         if (you.maxAmmo > 0 && playerChoice == 1) {
@@ -98,6 +104,7 @@ public class Occurrence {
 
     public void finalExam(Player you) {
 
+        Scanner inputCat = new Scanner(System.in);
         int latestChoice;
         int score = 0;
 
@@ -124,7 +131,7 @@ public class Occurrence {
         }
 
         System.out.println("Question 3:\nHow many times have you fed the cat?");
-        latestChoice = GameMainDrive.intChoice(you.catFood + 10);
+        latestChoice = inputCat.nextInt(); // there was an issue with taking 0 as input for choice + didn't want to mess w intChoice.
         if (latestChoice == you.catFood) {
             score += 1;
         }
@@ -168,17 +175,27 @@ public class Occurrence {
 
         GameMainDrive.eepy(500);
 
-        System.out.println("1. Trade 2 HP for +1 DMG\n Trade 10% accuracy for 2 HP\n Decline the offer");
+        System.out.println("1. Trade 2 HP for +1 DMG\n2. Trade 10% accuracy for 2 HP\n3. Politely decline the offer");
 
         playerChoice = GameMainDrive.intChoice(3);
 
-        // TODO: finish this stuff
+        GameMainDrive.eepy(500);
+
         switch (playerChoice) {
             case 1:
+                System.out.println("She sticks a needle in your arm, you nearly faint from the prick but you feel slightly stronger.");
+                System.out.println("Lost 2 HP, gained 1 DMG");
+                you.changeHealth(-1 * 2);
+                you.baseDmg += 1;
                 break;
             case 2:
+                System.out.println("She rubs your temples and your vision blurs slightly, you might need glasses now.. but you feel better!");
+                System.out.println("Lost 10% accuracy, gained 2 HP");
+                you.changeHealth(2);
+                you.baseAcc -= .1;
                 break;
             case 3:
+                System.out.println("She nods and waves goodbye, something tells you that you might see her again.");
                 break;
         }
     }
@@ -229,7 +246,7 @@ public class Occurrence {
 
         GameMainDrive.eepy(500);
 
-        System.out.println("1. Let Lynn inspect you (Chance to gain 100% HP or lose 50% HP).\n2. Wave her off (Chance to lose 30% HP).");
+        System.out.println("1. Let Lynn inspect you (Chance to double HP or lose 50% HP).\n2. Wave her off (Chance to lose 20% HP).");
 
         playerChoice = GameMainDrive.intChoice(2);
 
@@ -253,7 +270,7 @@ public class Occurrence {
             if (RNG.nextBoolean()) {
 
                 // If true
-                lostHp = (int)Math.ceil(you.getHealth() * 0.3);
+                lostHp = (int)Math.ceil(you.getHealth() * 0.2);
                 System.out.println("She looks offended and smacks you, you lose " + lostHp + " HP.");
 
                 you.changeHealth(-1 * lostHp);
@@ -263,5 +280,49 @@ public class Occurrence {
             }
 
         }
+
+    }
+
+    public void dumpsterDiver(Player you) {
+
+        int playerChoice;
+
+        System.out.println("As you keep venturing, a trashcan stands out to you. You REALLY want to dig in the trashcan. Like REALLY REALLY bad.");
+
+        GameMainDrive.eepy(500);
+
+        System.out.println("1. Dig in the trashcan (Random buffs/debuffs)\n2. Resist the urge and run away (Nothing happens)");
+
+        playerChoice = GameMainDrive.intChoice(2);
+
+        if (playerChoice == 1) {
+
+            int gambleNum = RNG.nextInt((2) + 1);
+
+            switch (gambleNum) {
+                case 0:
+                    System.out.println("You find some clean bandages and gauze, but the trash stench makes you feel weak...");
+                    System.out.println("Gained 1 HP, lost 1 DMG");
+                    you.changeHealth(1);
+                    you.baseDmg -= 1;
+                    break;
+                case 1:
+                    System.out.println("The stench kinda makes you sick... but what doesn't kill you makes you stronger!");
+                    System.out.println("Lost 1 HP, gained +1 DMG");
+                    you.changeHealth(-1);
+                    you.baseDmg += 1;
+                    break;
+                case 2:
+                    System.out.println("You dig up a golden trash bag! You find bandages and you decide to put the trash bag on to look cool");
+                    System.out.println("Gained 2 HP, gained +1 DMG");
+                    you.changeHealth(1);
+                    you.baseDmg += 1;
+                    break;
+            }
+        } else {
+            System.out.println("You walk away, leaving the sad looking trash bag in the distance");
+        }
+
+
     }
 }

@@ -89,6 +89,7 @@ public class GameMainDrive {
             System.out.println("Would you like to play again? (yes / no)");
 
             if (strChoice().equals("no")) {
+                System.out.println("Thank you for playing!");
                 keepPlaying = false;
             } else {
                 you = GameMainDrive.gameIntro(); // Should properly reset the player
@@ -272,6 +273,9 @@ public class GameMainDrive {
 
             case 6:
                 gambleRoom.adminLynn(you);
+                break;
+            case 7:
+                gambleRoom.dumpsterDiver(you);
                 break;
         }
 
