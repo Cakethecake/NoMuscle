@@ -1,33 +1,72 @@
 package NoMuscle;
+
 /*
 Name: Jamieson Moore
- */
+*/
+
 import java.util.Random;
 
 public class Room {
 
-    private Random RNG = new Random();
-    private RoomNames name;
-    private Event[] eventsInside;
-    private double[] eventProbs;
+    private final Random RNG = new Random();
+    private final RoomNames name;
+    private final Event[] eventsInside;
+    private final double[] eventProbs;
 
-    //  Default constructor (for driver obv)
+    // Default constructor (used by driver)
     public Room() {
-        this.name = RoomNames.values()[RNG.nextInt(RoomNames.values().length - 1)];
+        // FIXED: removed "- 1" so all room names are possible
+        this.name = RoomNames.values()[RNG.nextInt(RoomNames.values().length)];
 
-        Event e1 = new Event(RNG.nextInt(4));
-        Event e2 = new Event(RNG.nextInt(4));
-        Event e3 = new Event(RNG.nextInt(4));
+        Event e1, e2, e3;
+
+        // Creates events and makes sure the first is a fight,  they are all different, and all have descending probs
+
+        do {
+            e1 = new Event(6);
+        } while (e1.fightOrOccurrence == 1);
+
+        do {
+            e2 = new Event(RNG.nextInt(4) + 1);
+        } while (e2.toString().equals(e1.toString()) || e1.getProbCoefficient() <= e2.getProbCoefficient());
+
+        do {
+            e3 = new Event(RNG.nextInt(4) + 1);
+        } while (e3.toString().equals(e2.toString()) || e2.getProbCoefficient() < e3.getProbCoefficient());
+
 
         this.eventsInside = new Event[]{e1, e2, e3};
-        this.eventProbs = new double[]{0.33, 0.33, 0.34};
+
+        // Properly calculates the percentage
+        double totalCoef = e1.getProbCoefficient() + e2.getProbCoefficient() + e3.getProbCoefficient();
+        this.eventProbs = new double[]{
+                e1.getProbCoefficient() / totalCoef,
+                e2.getProbCoefficient() / totalCoef,
+                e3.getProbCoefficient() / totalCoef
+        };
     }
 
-    // Main constructor
-    public Room(Event[] eventsInside, double[] eventProbs) {
-        this.name = RoomNames.values()[RNG.nextInt(RoomNames.values().length - 1)];
+    // Main constructor (clean and safe I hope)
+    public Room(Event[] eventsInside) {
+
+        if (eventsInside == null) {
+            throw new IllegalArgumentException("Events or probabilities cannot be null");
+        }
+
+        if (eventsInside.length != 3) {
+            throw new IllegalArgumentException("Room must have exactly 3 events");
+        }
+
+        this.name = RoomNames.values()[RNG.nextInt(RoomNames.values().length)];
         this.eventsInside = eventsInside;
-        this.eventProbs = eventProbs;
+
+        // Properly calculates the percentage
+        double totalCoef = eventsInside[0].getProbCoefficient() + eventsInside[1].getProbCoefficient() + eventsInside[2].getProbCoefficient();
+        this.eventProbs = new double[]{
+                eventsInside[0].getProbCoefficient() / totalCoef,
+                eventsInside[1].getProbCoefficient() / totalCoef,
+                eventsInside[2].getProbCoefficient() / totalCoef
+        };
     }
 
     public RoomNames getName() {
@@ -43,9 +82,7 @@ public class Room {
     }
 
     public Event enterRoom() {
-        Random rand = new Random();
-        double randomValue = rand.nextDouble();
-
+        double randomValue = Math.random();
         double cumulative = 0;
 
         for (int i = 0; i < eventProbs.length; i++) {
@@ -56,5 +93,10 @@ public class Room {
         }
 
         return eventsInside[0]; // fallback
+    }
+
+    @Override
+    public String toString() {
+        return "Room: " + name + " | Events: " + eventsInside.length;
     }
 }

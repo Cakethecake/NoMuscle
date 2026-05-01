@@ -1,16 +1,19 @@
 package NoMuscle;
 
+import java.util.Random;
+
 public class Event {
     private int probCoefficient;
     public Entity containedFight;
     public Occurrence containedOccurrence;
+    private final Random RNG = new Random();
+    public int fightOrOccurrence;
 
     /**
-     * Event class with no parameters - throws illegal argument exception
-     * because event MUST have parameters
+     * Event class with no parameters; event MUST have parameters
      */
-    public Event() throws IllegalArgumentException {
-        throw new IllegalArgumentException("Event must have parameter >:(");
+    public Event() {
+        System.out.println("Event must have parameter >:(");
     }
 
     /**
@@ -21,6 +24,20 @@ public class Event {
      */
     public Event(int probCoefficient) {
         this.probCoefficient = probCoefficient;
+
+        //determines if the new event will have a fight or occurrence
+
+        this.fightOrOccurrence = RNG.nextInt(2);
+        if (fightOrOccurrence == 0) {
+            containedFight = new Entity(GameMainDrive.you.difficulty, false);
+            containedOccurrence = null;
+        } else {
+            containedOccurrence = new Occurrence();
+            if (containedOccurrence.ID == 3 || containedOccurrence.ID == 6) {
+                probCoefficient -= 1;
+            }
+            containedFight = null;
+        }
     }
 
     /**
@@ -32,6 +49,13 @@ public class Event {
      */
     public int getProbCoefficient() {
         return probCoefficient;
+    }
+
+    public String toString() {
+        if (fightOrOccurrence == 0) {
+            return containedFight.name;
+        }
+        return containedOccurrence.name;
     }
 
 }

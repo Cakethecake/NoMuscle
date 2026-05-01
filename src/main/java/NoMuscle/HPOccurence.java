@@ -1,4 +1,5 @@
-package NoMuscle;
+/** this code not used + i checked and it doesnt cause bug but i forgot how to delete it for everyone
+ * package NoMuscle;
 
 import java.util.Random;
 
@@ -11,7 +12,7 @@ class HPOccurrence extends Occurrence {
     private Random rand = new Random();
 
     public HPOccurrence(String name, int amount, String type) {
-        super(name);
+        super();
         this.amount = amount;
         this.type = type;
     }
@@ -53,4 +54,5 @@ class HPOccurrence extends Occurrence {
         }
     }
 }
+ */
 
