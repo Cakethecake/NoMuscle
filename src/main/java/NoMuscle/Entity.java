@@ -94,7 +94,7 @@ public class Entity  {
 
         } else {
 
-            name = "PlaceHolderFinalBoss";
+            name = "NoMuscle Man";
             baseDmg = 10;
             baseHP = 20;
 
@@ -102,8 +102,3 @@ public class Entity  {
 
     }
 }
-
-/**
- * entity will have random stats but difficulty will be ranked by a multiplier
- * main method will drive the attack
- */
