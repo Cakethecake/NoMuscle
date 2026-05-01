@@ -6,7 +6,7 @@ public class Entity  {
 
     private final Random RNG = new Random();
     //                                                      IDs: 0        1        2                3       4                    5              6        7                8                  9
-    private final static String[] possibleNames = new String[] {"Ratora","Resill","Lord Fardquaad","Kubis","A Hungry Caterpillar","A Strange Bird", "Jamie", "A Living Room", "Deer-headed Man", "Homunculus"};
+    private final static String[] possibleNames = new String[] {"Ratora","Resill","Lord Fardquaad","Kubis","A Hungry Caterpillar","A Strange Bird", "Rogue Fighter", "A Living Room", "Deer-headed Man", "Homunculus"};
     private final static int[] possibleBaseDMG = new int[] {    2,        3,       1,              2,       1,                   1,             2,       1,               3,                 1};
     private final static int[] possibleBaseHP = new int[] {     4,        5,       5,              3,       4,                   3,             3,       999,             5,                 4};
 
