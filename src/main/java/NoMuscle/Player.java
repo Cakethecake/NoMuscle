@@ -104,6 +104,9 @@ public class Player {
     public int getDifficulty() { return  difficulty;}
 
     public int attackKnife() {
+        //guard
+        if (health <= 0) return 0;
+
         if (RNG.nextDouble() < this.getBaseAcc()) {
             System.out.printf("Dealt %d damage\n\n", baseDmg);
             return this.baseDmg;
@@ -113,6 +116,16 @@ public class Player {
     }
 
     public int attackGun() {
+        // GUARD: Check ammo before processing RNG or logic
+        if (ammo <= 0) {
+            System.out.println("Out of ammo! You need to reload!\n\n");
+            return 0;
+        }
+
+        // GUARD: Check if player is alive
+        if (health <= 0) return 0;
+
+
         if ((RNG.nextDouble() < this.getBaseAcc() - .1) && ammo > 0) {
 
             System.out.printf("Dealt %d damage\n\n", (int) Math.ceil(baseDmg * 1.8));
