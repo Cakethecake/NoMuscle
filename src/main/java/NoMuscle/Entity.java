@@ -97,6 +97,7 @@ public class Entity  {
             name = "NoMuscle Man";
             baseDmg = 10;
             baseHP = 20;
+            currentHP = 20;
 
         }
 

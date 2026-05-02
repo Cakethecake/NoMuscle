@@ -13,27 +13,28 @@ public class GameMainDrive {
 
         while (keepPlaying) {
 
+            boolean playerWon = false; // fixes scoping
             while (you.health > 0) {
 
                 you.printProgress();
 
                 eepy(1000);
 
-                Room[] roomList = new Room[] {new Room(), new Room(), new Room()};
+                Room[] roomList = new Room[]{new Room(), new Room(), new Room()};
 
                 System.out.println("Three rooms are before you. Each has three possibilities within.");
                 System.out.println();
                 eepy(200);
 
                 for (int i = 0; i < 3; i++) {
-                    System.out.print((i + 1)+ ") " + roomList[i].getName());
+                    System.out.print((i + 1) + ") " + roomList[i].getName());
 
                     for (int j = 0; j < 3; j++) {
                         System.out.printf("\n\t%.0f%%: ", roomList[i].getEventProbs()[j] * 100);
                         if (roomList[i].getEventsInside()[j].fightOrOccurrence == 0) {
                             System.out.print("Fight ");
                         } else {
-                            System.out.print ("Encounter ");
+                            System.out.print("Encounter ");
                         }
                         System.out.print(roomList[i].getEventsInside()[j].toString());
 
@@ -56,7 +57,7 @@ public class GameMainDrive {
                 if (thisEvent.fightOrOccurrence == 0) {
                     fight(thisEvent.containedFight);
                 } else {
-                   occur(thisEvent.containedOccurrence);
+                    occur(thisEvent.containedOccurrence);
                 }
 
                 eepy(1000);
@@ -81,11 +82,36 @@ public class GameMainDrive {
 
                 }
 
+                playerWon = false;
+
+                // Boss battle when progress is at 100%
+                if (you.progress == 16) {
+                    System.out.println("You feel an overwhelming presence ahead... there is no turning back.");
+
+                    eepy(500);
+
+                    fight(new Entity((you.difficulty), true));
+
+                    if (you.health > 0) {
+                        System.out.println("The boss grunts in defeat as he falls to the floor, you did it...");
+
+                        eepy(500);
+
+                        System.out.println("It's finally over, you survived!");
+                        playerWon = true;
+                    }
+                    break;
+                }
+
                 eepy(1000);
 
             }
 
-            System.out.println("This is the end of everything... But not you.");
+            if (!playerWon) {
+
+                System.out.println("This is the end of everything... But not you."); // so you dont get this message when u win
+
+            }
             System.out.println("Would you like to play again? (yes / no)");
 
             if (strChoice().equals("no")) {
@@ -96,7 +122,6 @@ public class GameMainDrive {
             }
 
         }
-
 
     }
 
@@ -121,7 +146,7 @@ public class GameMainDrive {
         System.out.println("---------NO-MUSCLE---------");
         eepy(1000);
         System.out.println("A CLI game inspired by NO-SKIN by NOEYE SOFT");
-        System.out.println("Made for CMSC 255 by Jax, Jamie, Lynn, Caique, Angelique, and Haya");
+        System.out.println("Made for CMSC 255 by Jax, Jamie, Lynn, Caique, and Haya");
         System.out.println("");
         eepy(1000);
         System.out.print("Enter a player name to start: ");
@@ -139,6 +164,7 @@ public class GameMainDrive {
         do {
             choice = userIn.nextInt();
         } while (choice < 1 || choice > numCanMake);
+        userIn.nextLine(); // fixes bug with final exam
 
         return choice;
     }
@@ -182,6 +208,7 @@ public class GameMainDrive {
                     you.getBaseDmg(), you.getBaseAcc() * 100, (int)Math.ceil(you.getBaseDmg() * 1.8), (you.getBaseAcc() - .1) * 100, you.getAmmo(), you.maxAmmo);
 
             turnAction = intChoice(5);
+            boolean playerActed = false; // fixes double attack bug
 
             // Take the player's action
             switch (turnAction) {
@@ -195,8 +222,13 @@ public class GameMainDrive {
                     you.reload();
                     break;
                 case 4:
-                    // Currently unimplemented
                     System.out.println("You ready yourself for an attack...");
+
+                    eepy(500);
+
+                    you.changeHealth(-1 * you.defend(yourOpp));
+                    playerActed = true;
+
                     break;
                 case 5:
                     if (you.escape()) {
@@ -211,6 +243,11 @@ public class GameMainDrive {
             if (yourOpp.currentHP <= 0) {
 
                 inFight = false;
+
+            } else if (!playerActed) { // avoids being attacked twice when defend
+
+                you.changeHealth(-1* yourOpp.attackPlayer());
+                turnsTaken += 1;
 
             } else {
 
@@ -245,7 +282,6 @@ public class GameMainDrive {
         eepy(500);
 
         // Chooses the occurrence based on the ID it has.
-        // TODO: Implement the rest of these
         switch (gambleRoom.ID) {
             case 0:
                 gambleRoom.Jax(you);

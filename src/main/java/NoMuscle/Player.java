@@ -163,6 +163,15 @@ public class Player {
         }
     }
 
+    public int defend(Entity opp) {
+
+        int dmgTaken = (opp.attackPlayer() -1);
+
+        System.out.println("You brace yourself, reducing damage by 1!");
+
+        return dmgTaken;
+    }
+
     public void printProgress() {
 
         System.out.println("\nProgress:");
