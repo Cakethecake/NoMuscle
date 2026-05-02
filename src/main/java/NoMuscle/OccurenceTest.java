@@ -1,4 +1,4 @@
-package NoMuscle.TestFiles;
+package NoMuscle;
 
 public class OccurenceTest {
 }
