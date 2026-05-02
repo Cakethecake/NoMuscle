@@ -116,13 +116,13 @@ public class Player {
     }
 
     public int attackGun() {
-        // GUARD: Check ammo before processing RNG or logic
+        // Guard - Check ammo before processing RNG or logic
         if (ammo <= 0) {
             System.out.println("Out of ammo! You need to reload!\n\n");
             return 0;
         }
 
-        // GUARD: Check if player is alive
+        // Guard - Check if player is alive
         if (health <= 0) return 0;
 
 
@@ -146,6 +146,9 @@ public class Player {
     }
 
     public boolean escape() {
+
+        // Guard - Dead players can't run
+        if (health <= 0) return false;
 
         if (RNG.nextDouble() < Math.pow(10, (-1 * (difficulty / 10)))) {
 
