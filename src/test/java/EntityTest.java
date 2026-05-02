@@ -1,7 +1,6 @@
-package NoMuscle;
-
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import NoMuscle.Entity;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class EntityTest {
 
@@ -31,6 +30,6 @@ public class EntityTest {
         int dmg = enemy.attackPlayer();
 
         assertEquals(17, dmg);
-        assertFalse(enemy.charging, "Charging should be reset to false after attacking");
+        assertFalse("Charging should be reset to false after attacking", enemy.charging);
     }
 }
